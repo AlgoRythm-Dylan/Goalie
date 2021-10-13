@@ -1,0 +1,32 @@
+﻿<Window x:Class="Goalie.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Goalie"
+        mc:Ignorable="d"
+        Title="Goalie" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource GoalieGreen}">
+            <TextBlock Background="Transparent"
+                       TextAlignment="Center"
+                       Foreground="{StaticResource GoalieGreenContrast}"
+                       VerticalAlignment="Center"
+                       FontSize="30">
+                Goalie
+            </TextBlock>
+        </Grid>
+        <Button Grid.Row="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Style="{StaticResource ActionButton}"
+                Width="200"
+                Height="40"
+                Cursor="Hand">I Got Paid</Button>
+    </Grid>
+</Window>
