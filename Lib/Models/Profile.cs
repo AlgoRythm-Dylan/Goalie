@@ -2,14 +2,14 @@
 
 namespace Goalie.Lib.Models
 {
-    public class Profile
+    public class Profile : UniqueModel
     {
         public Profile()
         {
             Name = "";
+            Accounts = new List<Account>();
         }
-        public string ID { get; set; }
         public string Name { get; set; }
-        public List<string> Accounts { get; set; }
+        public List<Account> Accounts { get; set; }
     }
 }

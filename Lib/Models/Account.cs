@@ -1,6 +1,6 @@
 ﻿namespace Goalie.Lib.Models
 {
-    public class Account
+    public class Account : UniqueModel
     {
         public Account()
         {
@@ -10,7 +10,6 @@
             FixedGoal = null;
             ContinueSavingAfterGoalMet = true;
         }
-        public string ID { get; set; }
         public string Name { get; set; }
         public double Balance { get; set; }
         public AccountType Type { get; set; }

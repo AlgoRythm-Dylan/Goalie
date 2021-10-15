@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Goalie.Lib.Models;
 
 namespace Goalie
 {
@@ -23,6 +24,18 @@ namespace Goalie
         public MainWindow()
         {
             InitializeComponent();
+        }
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+            var newProfile = new NewProfile();
+            newProfile.Owner = this;
+            newProfile.ShowDialog();
+            Profile profile = newProfile.Profile;
+            if(profile == null)
+            {
+                Close();
+            }
         }
     }
 }

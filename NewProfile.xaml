@@ -1,0 +1,51 @@
+﻿<Window x:Class="Goalie.NewProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Goalie"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Title="New Profile" Height="350" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Background="{StaticResource GoalieGreen}">
+            <TextBlock VerticalAlignment="Center"
+                       FontSize="24"
+                       Margin="10"
+                       Foreground="{StaticResource GoalieGreenContrast}">Set Up New Profile</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <DockPanel Margin="10 50 10 0">
+                <TextBlock Width="120" Margin="10" TextAlignment="Right" VerticalAlignment="Center">Profile Name:</TextBlock>
+                <TextBox Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Text="default" x:Name="Name"/>
+            </DockPanel>
+            <DockPanel Margin="10 0 10 10">
+                <TextBlock Width="120" Margin="10" TextAlignment="Right" VerticalAlignment="Center">Initial Savings Amount:</TextBlock>
+                <TextBox Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Text="0.00" x:Name="InitialSavings"/>
+            </DockPanel>
+        </StackPanel>
+        <DockPanel Background="{StaticResource VeryLightGray}" Grid.Row="2">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button VerticalAlignment="Center"
+                        Width="100"
+                        Height="28"
+                        Margin="0 0 10 0"
+                        x:Name="Cancel" Click="Cancel_Click">Cancel</Button>
+                <Button Style="{StaticResource ActionButton}"
+                        VerticalAlignment="Center"
+                        Width="100"
+                        Height="28"
+                        Margin="0 0 10 0"
+                        Cursor="Hand"
+                        x:Name="Done" Click="Done_Click">Done</Button>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
