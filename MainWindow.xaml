@@ -54,15 +54,15 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource SummaryFigureTop}">6</TextBlock>
+                        <TextBlock Style="{StaticResource SummaryFigureTop}">0</TextBlock>
                         <TextBlock Style="{StaticResource SummaryFigureBottom}">Goals</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource SummaryFigureTop}">$85,238</TextBlock>
+                        <TextBlock Style="{StaticResource SummaryFigureTop}">$0.00</TextBlock>
                         <TextBlock Style="{StaticResource SummaryFigureBottom}">Total Savings</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource SummaryFigureTop}">$5,229</TextBlock>
+                        <TextBlock Style="{StaticResource SummaryFigureTop}">$0.00</TextBlock>
                         <TextBlock Style="{StaticResource SummaryFigureBottom}">Towards Goals</TextBlock>
                     </StackPanel>
                 </Grid>

@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Goalie.Lib.Data;
 using Goalie.Lib.Models;
 
 namespace Goalie
@@ -28,14 +17,49 @@ namespace Goalie
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);
-            var newProfile = new NewProfile();
-            newProfile.Owner = this;
-            newProfile.ShowDialog();
-            Profile profile = newProfile.Profile;
-            if(profile == null)
+            LoadAppData();
+        }
+
+        public async void LoadAppData()
+        {
+            var appData = await AppDataService.ReadAsync();
+            if(appData == null || appData.CurrentProfileID == null)
             {
-                Close();
+                var newProfileDialog = new NewProfile();
+                newProfileDialog.Owner = this;
+                newProfileDialog.ShowDialog();
+                Profile profile = newProfileDialog.Profile;
+                if (profile == null)
+                {
+                    Close();
+                }
+                else
+                {
+                    if(appData == null)
+                        appData = new AppData();
+                    appData.CurrentProfileID = profile.ID;
+                    try
+                    {
+                        await AppDataService.WriteAsync(appData);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show($"FATAL: Could not save app data: {ex.Message}");
+                        Close();
+                    }
+                    try
+                    {
+                        await ProfileService.WriteAsync(profile);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show($"ERROR: Could not save profile: {ex.Message}");
+                        appData.CurrentProfileID = null;
+                        await AppDataService.WriteAsync(appData);
+                    }
+                }
             }
         }
+
     }
 }
