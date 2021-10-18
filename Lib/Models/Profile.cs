@@ -10,6 +10,10 @@ namespace Goalie.Lib.Models
             Accounts = new List<Account>();
         }
         public string Name { get; set; }
+        public string PinnedAccount { get; set; }
         public List<Account> Accounts { get; set; }
+        // Stats
+        public int PaychecksAllTime { get; set; }
+        public decimal IncomeAllTime { get; set; }
     }
 }

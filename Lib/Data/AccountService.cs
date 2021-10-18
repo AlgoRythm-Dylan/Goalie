@@ -14,24 +14,9 @@ namespace Goalie.Lib.Data
         {
             return new DataDir("accounts", ProfileService.GetDataDir(profile));
         }
-        public static Task<List<Account>> ReadAll(Profile profile)
+        public static DataDir GetAccountDataDir(Profile profile, string AccountID)
         {
-            return GetAccountsDataDir(profile).ReadAllItemsAsync<Account>();
-        }
-        public static async Task<Account> Read(Profile profile, string ID)
-        {
-            return JsonSerializer.Deserialize<Account>(
-                await File.ReadAllTextAsync(Path.Combine(GetAccountsDataDir(profile).Path, $"{ID}.account.json"))
-            );
-        }
-        public static async Task Write(Profile profile, Account account)
-        {
-            var accountsDataDir = GetAccountsDataDir(profile);
-            var accountDataDir = new DataDir(account.ID, accountsDataDir);
-            accountDataDir.Ensure();
-            Directory.CreateDirectory(Path.Combine("transactions", accountDataDir.Path));
-            await File.WriteAllTextAsync(Path.Combine(accountsDataDir.Path, $"{account.ID}.account.json"),
-                JsonSerializer.Serialize(account));
+            return new DataDir(AccountID, GetAccountsDataDir(profile));
         }
     }
 }

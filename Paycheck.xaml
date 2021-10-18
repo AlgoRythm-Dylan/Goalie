@@ -1,0 +1,23 @@
+﻿<Window x:Class="Goalie.Paycheck"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Goalie"
+        mc:Ignorable="d"
+        Title="Paycheck" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="{StaticResource GoalieGreen}">
+            <TextBlock VerticalAlignment="Center"
+                    FontSize="24"
+                    Margin="10"
+                    Foreground="{StaticResource GoalieGreenContrast}"
+                    x:Name="GoalLabel">Enter Income Information</TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

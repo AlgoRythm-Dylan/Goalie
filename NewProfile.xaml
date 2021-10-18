@@ -35,13 +35,13 @@
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button VerticalAlignment="Center"
                         Width="100"
-                        Height="28"
+                        Height="30"
                         Margin="0 0 10 0"
                         x:Name="Cancel" Click="Cancel_Click">Cancel</Button>
                 <Button Style="{StaticResource ActionButton}"
                         VerticalAlignment="Center"
                         Width="100"
-                        Height="28"
+                        Height="30"
                         Margin="0 0 10 0"
                         Cursor="Hand"
                         x:Name="Done" Click="Done_Click">Done</Button>

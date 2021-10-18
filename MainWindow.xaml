@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Goalie"
+        xmlns:GoalControls="clr-namespace:Goalie.Lib.UserControls"
         mc:Ignorable="d"
+        d:Height="450" d:Width="800"
         Title="Goalie" MinHeight="450" MinWidth="800" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="SummaryFigureTop" TargetType="TextBlock">
@@ -30,15 +32,19 @@
                        VerticalAlignment="Center"
                        FontSize="30">
                 Goalie
-            </TextBlock>
+                </TextBlock>
         </Grid>
-        <Button Grid.Row="1"
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Width="100" Height="30" Margin="0 0 30 0" Cursor="Hand">Transfer Money</Button>
+            <Button
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Style="{StaticResource ActionButton}"
                 Width="200"
                 Height="40"
                 Cursor="Hand">I Got Paid</Button>
+            <Button Width="100" Height="30" Margin="30 0 0 0" Cursor="Hand" Click="Button_Click">New Goal</Button>
+        </StackPanel>
         <UserControl Template="{StaticResource Card}" Margin="10" Grid.Row="2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -54,18 +60,24 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource SummaryFigureTop}">0</TextBlock>
+                        <TextBlock Style="{StaticResource SummaryFigureTop}" x:Name="GoalCount">0</TextBlock>
                         <TextBlock Style="{StaticResource SummaryFigureBottom}">Goals</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource SummaryFigureTop}">$0.00</TextBlock>
+                        <TextBlock Style="{StaticResource SummaryFigureTop}" x:Name="TotalSavings">$0.00</TextBlock>
                         <TextBlock Style="{StaticResource SummaryFigureBottom}">Total Savings</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource SummaryFigureTop}">$0.00</TextBlock>
+                        <TextBlock Style="{StaticResource SummaryFigureTop}" x:Name="TotalSavingsTowardsGoals">$0.00</TextBlock>
                         <TextBlock Style="{StaticResource SummaryFigureBottom}">Towards Goals</TextBlock>
                     </StackPanel>
                 </Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto"
+                              Grid.Row="1">
+                    <StackPanel VerticalAlignment="Stretch" 
+                                x:Name="GoalScroll"/>
+                </ScrollViewer>
             </Grid>
         </UserControl>
     </Grid>

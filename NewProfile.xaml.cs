@@ -3,6 +3,7 @@ using Goalie.Lib;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Globalization;
 
 namespace Goalie
 {
@@ -30,10 +31,10 @@ namespace Goalie
 
         private void Done_Click(object sender, RoutedEventArgs e)
         {
-            double initialSavings;
+            decimal initialSavings;
             try
             {
-                initialSavings = double.Parse(InitialSavings.Text);
+                initialSavings = decimal.Parse(InitialSavings.Text, NumberStyles.Currency);
 
                 Profile = new Profile();
                 Profile.Name = Name.Text;
@@ -43,8 +44,10 @@ namespace Goalie
                 generalSavingsAccount.NewID();
                 generalSavingsAccount.Type = AccountType.GeneralSavings;
                 generalSavingsAccount.Balance = initialSavings;
+                generalSavingsAccount.Name = "General Savings";
 
                 Profile.Accounts.Add(generalSavingsAccount);
+                Profile.PinnedAccount = generalSavingsAccount.ID;
 
                 Close();
             }
