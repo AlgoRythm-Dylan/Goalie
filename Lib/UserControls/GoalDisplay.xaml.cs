@@ -33,6 +33,12 @@ namespace Goalie.Lib.UserControls
             UpdateGoalProgressbar();
         }
 
+        public GoalDisplay(Account account)
+        {
+            InitializeComponent();
+            SetAccount(account);
+        }
+
         private void UpdateGoalProgressbar()
         {
             if (Account.Type != AccountType.Goal || Account.FixedGoal == null
@@ -53,11 +59,6 @@ namespace Goalie.Lib.UserControls
             }
         }
 
-        public GoalDisplay(Account account)
-        {
-            InitializeComponent();
-            SetAccount(account);
-        }
         public void SetAccount(Account account)
         {
             Account = account;
@@ -84,7 +85,7 @@ namespace Goalie.Lib.UserControls
                 }
                 else if (Account.SavingsType == GoalSavingsType.Fixed)
                 {
-                    GoalRules.Text = $"${Account.SavingsAmount} from each paycheck";
+                    GoalRules.Text = $"{Account.SavingsAmount??0:C} from each paycheck";
                 }
                 // Account balance (and goal if present) display
                 if(Account.FixedGoal != null && Account.FixedGoal != 0)
