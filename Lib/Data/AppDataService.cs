@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Goalie.Lib.Models;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
-using Goalie.Lib.Models;
 
 namespace Goalie.Lib.Data
 {

@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Goalie"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Transfer Money" Height="450" Width="800">
     <Grid>
-        <TextBlock>Transfer money between accounts</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="{StaticResource GoalieGreen}">
+            <TextBlock VerticalAlignment="Center"
+                    FontSize="24"
+                    Margin="10"
+                    Foreground="{StaticResource GoalieGreenContrast}"
+                    x:Name="GoalLabel">Transfer money between accounts</TextBlock>
+        </StackPanel>
     </Grid>
 </Window>
