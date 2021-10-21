@@ -35,11 +35,14 @@ namespace Goalie.Lib.Models
         {
             return new DataDir("transactions", AccountService.GetAccountDataDir(profile, this.ID));
         }
-        public async Task TransferAsync(Profile profile, Account otherAccount, decimal amount)
+        public async Task TransferAsync(Profile profile, Account otherAccount, decimal amount, string desc=null)
         {
             Balance += amount;
             otherAccount.Balance -= amount;
             Transaction thisTransaction = new Transaction(), otherTransaction = new Transaction();
+
+            if (desc != null && desc == "")
+                desc = null;
 
             thisTransaction.NewID();
             otherTransaction.NewID();
@@ -49,6 +52,9 @@ namespace Goalie.Lib.Models
 
             thisTransaction.OtherAccountID = otherAccount.ID;
             otherTransaction.OtherAccountID = ID;
+
+            thisTransaction.Description = desc;
+            otherTransaction.Description = desc;
 
             TransactionsAllTime++;
             otherAccount.TransactionsAllTime++;
