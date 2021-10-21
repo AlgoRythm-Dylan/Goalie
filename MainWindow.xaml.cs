@@ -155,5 +155,12 @@ namespace Goalie
                 DisplayProfile();
             }
         }
+
+        private void Transfer_Click(object sender, RoutedEventArgs e)
+        {
+            var transfer = new Transfer(Profile);
+            transfer.Owner = this;
+            transfer.ShowDialog();
+        }
     }
 }

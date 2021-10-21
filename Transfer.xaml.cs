@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Goalie.Lib.Models;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Goalie
 {
@@ -19,9 +8,16 @@ namespace Goalie
     /// </summary>
     public partial class Transfer : Window
     {
-        public Transfer()
+        public Profile Profile;
+        public bool ShouldSave;
+        public Transfer(Profile profile)
         {
             InitializeComponent();
+            Profile = profile;
+            ShouldSave = false;
+
+            Source.ItemsSource = profile.Accounts;
+            Destination.ItemsSource = profile.Accounts;
         }
     }
 }

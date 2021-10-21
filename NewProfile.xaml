@@ -24,7 +24,7 @@
         <StackPanel Grid.Row="1">
             <DockPanel Margin="10 50 10 0">
                 <TextBlock Width="120" Margin="10" TextAlignment="Right" VerticalAlignment="Center">Profile Name:</TextBlock>
-                <TextBox Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Text="default" x:Name="Name"/>
+                <TextBox Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Text="default" x:Name="ProfileName"/>
             </DockPanel>
             <DockPanel Margin="10 0 10 10">
                 <TextBlock Width="120" Margin="10" TextAlignment="Right" VerticalAlignment="Center">Initial Savings Amount:</TextBlock>

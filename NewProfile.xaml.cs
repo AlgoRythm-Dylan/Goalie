@@ -1,9 +1,8 @@
-﻿using Goalie.Lib.Models;
-using Goalie.Lib;
+﻿using Goalie.Lib;
+using Goalie.Lib.Models;
 using System;
-using System.Collections.Generic;
-using System.Windows;
 using System.Globalization;
+using System.Windows;
 
 namespace Goalie
 {
@@ -37,7 +36,7 @@ namespace Goalie
                 initialSavings = decimal.Parse(InitialSavings.Text, NumberStyles.Currency);
 
                 Profile = new Profile();
-                Profile.Name = Name.Text;
+                Profile.Name = ProfileName.Text;
                 Profile.NewID();
 
                 var generalSavingsAccount = new Account();
