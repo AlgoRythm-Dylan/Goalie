@@ -90,6 +90,8 @@ namespace Goalie
             Account.SavingsType = (GoalSavingsType)SavingsType.SelectedValue;
             Account.FixedGoal = goal;
             Account.ContinueSavingAfterGoalMet = ContinueAfterGoalMet.IsChecked ?? true;
+            if (IsNewMode)
+                Account.NewID();
 
             ShouldSave = true;
             Close();

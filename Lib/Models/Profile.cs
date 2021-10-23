@@ -15,5 +15,14 @@ namespace Goalie.Lib.Models
         // Stats
         public int PaychecksAllTime { get; set; }
         public decimal IncomeAllTime { get; set; }
+
+        public Account GetAccountByID(string ID)
+        {
+            foreach (Account account in Accounts)
+                if (account.ID == ID)
+                    return account;
+            return null;
+        }
+
     }
 }

@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:Goalie"
         mc:Ignorable="d"
         ResizeMode="NoResize"
+        ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         Title="Transfer Money" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
         <StackPanel Background="{StaticResource GoalieGreen}">
             <TextBlock VerticalAlignment="Center"
@@ -38,7 +39,8 @@
                         CornerRadius="3"/>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock>Source</TextBlock>
-                    <ComboBox Width="150" x:Name="Source" DisplayMemberPath="Name" SelectedValuePath="ID"></ComboBox>
+                    <ComboBox Width="150" x:Name="Source" DisplayMemberPath="Name" SelectedValuePath="ID" SelectionChanged="Source_SelectionChanged"></ComboBox>
+                    <TextBlock x:Name="SourceBalance" Foreground="{StaticResource SoftControlForeground}">Balance:</TextBlock>
                 </StackPanel>
 
                 <Rectangle Grid.Column="2"
@@ -62,7 +64,8 @@
                         CornerRadius="3"/>
                 <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock>Destination</TextBlock>
-                    <ComboBox Width="150" x:Name="Destination" DisplayMemberPath="Name" SelectedValuePath="ID"></ComboBox>
+                    <ComboBox Width="150" x:Name="Destination" DisplayMemberPath="Name" SelectedValuePath="ID" SelectionChanged="Destination_SelectionChanged"></ComboBox>
+                    <TextBlock x:Name="DestinationBalance" Foreground="{StaticResource SoftControlForeground}">Balance:</TextBlock>
                 </StackPanel>
             </Grid>
             <TextBlock Width="300" Margin="10 40 10 0">Description / Comments (optional)</TextBlock>
