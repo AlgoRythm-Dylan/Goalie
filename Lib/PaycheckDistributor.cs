@@ -6,7 +6,7 @@ namespace Goalie.Lib
 {
     public class PaycheckDistributionError : ArgumentOutOfRangeException
     {
-        public PaycheckDistributionError(string message) : base(message) { }
+        public PaycheckDistributionError(string message) : base(null, message) { }
     }
     public class PaycheckDistributor
     {
@@ -39,6 +39,9 @@ namespace Goalie.Lib
                 throw new PaycheckDistributionError($"Percentage goals sum to more than 100% ({totalPercentageSavings}%)");
             // Calculate the MINIMUM required for the precentage-amount goals
             decimal minForPercentages = Math.Floor(paycheckAmount * (totalPercentageSavings / 100));
+            if (minForPercentages + totalRequiredFixedSavings > paycheckAmount)
+                throw new PaycheckDistributionError($"Not enough income to satisfy both percentage and fixed goals. " +
+                    $"(Required: {minForPercentages + totalRequiredFixedSavings:C}, provided: {paycheckAmount:C})");
             // Give each percentage goal MINIMUM amount of money, calculate remainder
             decimal percentageGoalsDistributed = 0;
             foreach (var percentageGoal in percentageAmountAccounts)

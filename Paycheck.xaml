@@ -30,13 +30,13 @@
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock>Net pay (after tax):</TextBlock>
-                <TextBox x:Name="NetPay" Width="200"/>
+                <TextBox x:Name="NetPay" Width="200" KeyUp="NetPay_KeyUp"/>
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
                 <TextBlock Margin="10"
                            Foreground="{StaticResource SoftControlForeground}"
@@ -48,7 +48,8 @@
                                 <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
                                           VerticalAlignment="Center"
                                           DockPanel.Dock="Left"
-                                          Checked="SomethingChecked"/>
+                                          Checked="SomethingChecked"
+                                          Unchecked="SomethingChecked"/>
                                 <TextBlock Margin="5" Text="{Binding}"
                                            DockPanel.Dock="Left"/>
                             </DockPanel>
@@ -61,10 +62,11 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
                 <TextBlock Grid.Row="2"
-                           VerticalAlignment="Center"
+                           VerticalAlignment="Bottom"
                            HorizontalAlignment="Right"
                            Margin="10"
-                           x:Name="SummaryLabel">Loading Summary...</TextBlock>
+                           x:Name="SummaryLabel"
+                           TextWrapping="Wrap">Loading Summary...</TextBlock>
             </Grid>
         </Grid>
         
