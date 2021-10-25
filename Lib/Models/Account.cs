@@ -16,6 +16,7 @@ namespace Goalie.Lib.Models
             FixedGoal = null;
             ContinueSavingAfterGoalMet = true;
             CreatedDate = DateTime.Now;
+            Enabled = true;
         }
         public string Name { get; set; }
         public decimal Balance { get; set; }
@@ -29,6 +30,34 @@ namespace Goalie.Lib.Models
         public decimal SavedAllTime { get; set; }
         public decimal SpentAllTime { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool Enabled { get; set; }
+
+        public override string ToString()
+        {
+            string description;
+            if(Type == AccountType.GeneralSavings)
+            {
+                description = $"General Savings Account ({Balance:C})";
+            }
+            else
+            {
+                string rules;
+                if(SavingsType == GoalSavingsType.Percentage)
+                {
+                    rules = $"{SavingsAmount}% of each paycheck";
+                }
+                else if(SavingsType == GoalSavingsType.Fixed)
+                {
+                    rules = $"{SavingsAmount:C} from each paycheck";
+                }
+                else
+                {
+                    rules = "managed manually";
+                }
+                description = $"{rules} (balance: {Balance:C})";
+            }
+            return $"{Name} - {description}";
+        }
 
         // Behavior
         public DataDir GetTransactionDataDir(Profile profile)

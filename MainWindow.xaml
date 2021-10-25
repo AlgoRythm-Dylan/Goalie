@@ -37,12 +37,13 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Width="100" Height="30" Margin="0 0 30 0" Cursor="Hand" x:Name="Transfer" Click="Transfer_Click">Transfer Money</Button>
             <Button
+                x:Name="PaycheckButton"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Style="{StaticResource ActionButton}"
                 Width="200"
                 Height="40"
-                Cursor="Hand">I Got Paid</Button>
+                Cursor="Hand" Click="PaycheckButton_Click">I Got Paid</Button>
             <Button Width="100" Height="30" Margin="30 0 0 0" Cursor="Hand" Click="Button_Click">New Goal</Button>
         </StackPanel>
         <UserControl Template="{StaticResource Card}" Margin="10" Grid.Row="2">

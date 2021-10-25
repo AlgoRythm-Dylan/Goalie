@@ -162,5 +162,12 @@ namespace Goalie
             transfer.Owner = this;
             transfer.ShowDialog();
         }
+
+        private void PaycheckButton_Click(object sender, RoutedEventArgs e)
+        {
+            var paycheck = new Paycheck(Profile);
+            paycheck.Owner = this;
+            paycheck.ShowDialog();
+        }
     }
 }

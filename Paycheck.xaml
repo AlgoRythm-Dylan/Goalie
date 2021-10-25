@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Goalie"
         mc:Ignorable="d"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
         Title="Paycheck" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,5 +22,67 @@
                     Foreground="{StaticResource GoalieGreenContrast}"
                     x:Name="GoalLabel">Enter Income Information</TextBlock>
         </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock>Net pay (after tax):</TextBlock>
+                <TextBox x:Name="NetPay" Width="200"/>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="10"
+                           Foreground="{StaticResource SoftControlForeground}"
+                           FontSize="20">Apply to goals:</TextBlock>
+                <ListView BorderThickness="0" x:Name="SelectGoalCheckboxes" Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel LastChildFill="True">
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          VerticalAlignment="Center"
+                                          DockPanel.Dock="Left"
+                                          Checked="SomethingChecked"/>
+                                <TextBlock Margin="5" Text="{Binding}"
+                                           DockPanel.Dock="Left"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Focusable" Value="false"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <TextBlock Grid.Row="2"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           Margin="10"
+                           x:Name="SummaryLabel">Loading Summary...</TextBlock>
+            </Grid>
+        </Grid>
+        
+        <DockPanel Background="{StaticResource VeryLightGray}" Grid.Row="2">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button VerticalAlignment="Center"
+                        Width="100"
+                        Height="30"
+                        Margin="0 0 10 0"
+                        x:Name="Cancel" Click="Cancel_Click">Cancel</Button>
+                <Button Style="{StaticResource ActionButton}"
+                        VerticalAlignment="Center"
+                        Width="100"
+                        Height="30"
+                        Margin="0 0 10 0"
+                        Cursor="Hand"
+                        x:Name="Done" Click="Done_Click">Done</Button>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Goalie.Lib.Models;
 
 namespace Goalie
 {
@@ -19,9 +11,45 @@ namespace Goalie
     /// </summary>
     public partial class Paycheck : Window
     {
-        public Paycheck()
+        public Profile Profile { get; set; }
+        public List<Account> Accounts { get; set; }
+        public bool Save { get; set; }
+        public Paycheck(Profile profile)
         {
             InitializeComponent();
+            Save = false;
+            Profile = profile;
+            List<Account> accounts = profile.Accounts
+                                .Where(account => account.Type == Lib.AccountType.Goal &&
+                                  account.SavingsType != Lib.GoalSavingsType.Manual).ToList();
+            List<AccountListView> accountsList = new List<AccountListView>();
+            foreach(Account account in accounts)
+            {
+                accountsList.Add(new AccountListView(account));
+            }
+            SelectGoalCheckboxes.ItemsSource = accountsList;
+            NetPay.Focus();
         }
+
+        private void SomethingChecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Done_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void DoSummary()
+        {
+
+        }
+
     }
 }
