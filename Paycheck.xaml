@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock>Net pay (after tax):</TextBlock>
-                <TextBox x:Name="NetPay" Width="200" KeyUp="NetPay_KeyUp"/>
+                <TextBox x:Name="NetPay" Width="200" TextChanged="NetPay_TextChanged"/>
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Goalie.Lib;
+using Goalie.Lib.Models;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
-using Goalie.Lib.Models;
-using System.Globalization;
-using Goalie.Lib;
+using System.Windows.Controls;
 
 namespace Goalie
 {
@@ -23,8 +23,8 @@ namespace Goalie
             Save = false;
             Profile = profile;
             List<Account> accounts = profile.Accounts
-                                .Where(account => account.Type == Lib.AccountType.Goal &&
-                                  account.SavingsType != Lib.GoalSavingsType.Manual).ToList();
+                                .Where(account => account.Type == AccountType.Goal &&
+                                  account.SavingsType != GoalSavingsType.Manual).ToList();
             AccountList = new List<AccountListView>();
             foreach(Account account in accounts)
             {
@@ -80,7 +80,7 @@ namespace Goalie
             }
         }
 
-        private void NetPay_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void NetPay_TextChanged(object sender, TextChangedEventArgs e)
         {
             DoSummary();
         }

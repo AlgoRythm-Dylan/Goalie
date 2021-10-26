@@ -38,7 +38,7 @@ namespace Goalie.Lib
             if (totalPercentageSavings > 100)
                 throw new PaycheckDistributionError($"Percentage goals sum to more than 100% ({totalPercentageSavings}%)");
             // Calculate the MINIMUM required for the precentage-amount goals
-            decimal minForPercentages = Math.Floor(paycheckAmount * (totalPercentageSavings / 100));
+            decimal minForPercentages = MoneyMath.Floor(paycheckAmount * (totalPercentageSavings / 100));
             if (minForPercentages + totalRequiredFixedSavings > paycheckAmount)
                 throw new PaycheckDistributionError($"Not enough income to satisfy both percentage and fixed goals. " +
                     $"(Required: {minForPercentages + totalRequiredFixedSavings:C}, provided: {paycheckAmount:C})");
@@ -46,7 +46,7 @@ namespace Goalie.Lib
             decimal percentageGoalsDistributed = 0;
             foreach (var percentageGoal in percentageAmountAccounts)
             {
-                decimal thisGoalMin = Math.Floor(paycheckAmount * ((percentageGoal.SavingsAmount ?? 0) / 100));
+                decimal thisGoalMin = MoneyMath.Floor(paycheckAmount * ((percentageGoal.SavingsAmount ?? 0) / 100));
                 percentageGoalsDistributed += thisGoalMin;
                 results[percentageGoal] = thisGoalMin;
             }
