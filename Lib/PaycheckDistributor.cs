@@ -61,5 +61,31 @@ namespace Goalie.Lib
             }
             return results;
         }
+
+        public static decimal MinimumRequired(List<Account> accounts)
+        {
+            decimal totalRequiredFixedSavings = 0;
+            decimal totalPercentageSavings = 0;
+            foreach (var account in accounts)
+            {
+                if (account.SavingsType == GoalSavingsType.Fixed)
+                {
+                    totalRequiredFixedSavings += account.SavingsAmount ?? 0;
+                }
+                else if (account.SavingsType == GoalSavingsType.Percentage)
+                {
+                    totalPercentageSavings += account.SavingsAmount ?? 0;
+                }
+            }
+            if(totalPercentageSavings == 0 || totalPercentageSavings > 100)
+            {
+                return totalRequiredFixedSavings;
+            }
+            else
+            {
+                return MoneyMath.Floor(totalRequiredFixedSavings / (1 - (totalPercentageSavings / 100)));
+            }
+        }
+
     }
 }

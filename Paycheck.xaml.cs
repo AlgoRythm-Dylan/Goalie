@@ -32,6 +32,7 @@ namespace Goalie
             }
             SelectGoalCheckboxes.ItemsSource = AccountList;
             NetPay.Focus();
+            DoSummary();
         }
 
         private void SomethingChecked(object sender, RoutedEventArgs e)
@@ -51,13 +52,20 @@ namespace Goalie
 
         private void DoSummary()
         {
+            List<Account> selectedAccounts = new List<Account>();
+            foreach (var account in AccountList.Where(item => item.IsSelected))
+            {
+                selectedAccounts.Add(account);
+            }
+            decimal minimumForGoals = PaycheckDistributor.MinimumRequired(selectedAccounts);
+            Minimum.Text = $"Minimum: {minimumForGoals:C}";
             try
             {
                 decimal income = decimal.Parse(NetPay.Text, NumberStyles.Currency);
-                List<Account> selectedAccounts = new List<Account>();
-                foreach(var account in AccountList.Where(item => item.IsSelected))
+                if(income < minimumForGoals)
                 {
-                    selectedAccounts.Add(account);
+                    SummaryLabel.Text = $"Minimum not met (Required: {minimumForGoals:C}, provided: {income:C})";
+                    return;
                 }
                 try
                 {
@@ -84,5 +92,6 @@ namespace Goalie
         {
             DoSummary();
         }
+
     }
 }

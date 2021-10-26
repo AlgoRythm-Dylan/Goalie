@@ -31,6 +31,7 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock>Net pay (after tax):</TextBlock>
                 <TextBox x:Name="NetPay" Width="200" TextChanged="NetPay_TextChanged"/>
+                <TextBlock Foreground="{StaticResource SoftControlForeground}" x:Name="Minimum">Minimum: ...</TextBlock>
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
