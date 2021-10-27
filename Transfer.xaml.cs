@@ -1,6 +1,7 @@
 ﻿using Goalie.Lib.Models;
 using System.Windows;
 using System.Windows.Controls;
+using System.Globalization;
 
 namespace Goalie
 {
@@ -33,6 +34,38 @@ namespace Goalie
         {
             DestinationAccount = Profile.GetAccountByID((string)Destination.SelectedValue);
             DestinationBalance.Text = $"Balance: {DestinationAccount.Balance:C}";
+        }
+
+        private async void TransferButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                decimal amount = decimal.Parse(Amount.Text, NumberStyles.Currency);
+                if(SourceAccount == null || DestinationAccount == null)
+                {
+                    MessageBox.Show("Please select two accounts to transfer between", "Not Enough Accounts",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if(amount == 0)
+                {
+                    MessageBox.Show($"Transaction must not be {0:C}", "Empty Transaction",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                string desc = Description.Text;
+                if (desc.Length == 0)
+                    desc = null;
+                await SourceAccount.TransferAsync(Profile, DestinationAccount, amount, desc);
+                ShouldSave = true;
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show("Please input a valid currency value", "Format Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                Amount.Focus();
+            }
         }
     }
 }

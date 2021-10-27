@@ -167,11 +167,18 @@ namespace Goalie
             }
         }
 
-        private void Transfer_Click(object sender, RoutedEventArgs e)
+        private async void Transfer_Click(object sender, RoutedEventArgs e)
         {
             var transfer = new Transfer(Profile);
             transfer.Owner = this;
             transfer.ShowDialog();
+            if (transfer.ShouldSave)
+            {
+                Profile.SetAccountByID(transfer.SourceAccount.ID, transfer.SourceAccount);
+                Profile.SetAccountByID(transfer.DestinationAccount.ID, transfer.DestinationAccount);
+                await ProfileService.WriteAsync(Profile);
+                DisplayProfile();
+            }
         }
 
         private void PaycheckButton_Click(object sender, RoutedEventArgs e)

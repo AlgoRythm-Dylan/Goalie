@@ -62,12 +62,12 @@ namespace Goalie.Lib.Models
         // Behavior
         public DataDir GetTransactionDataDir(Profile profile)
         {
-            return new DataDir("transactions", AccountService.GetAccountDataDir(profile, this.ID));
+            return new DataDir("transactions", AccountService.GetAccountDataDir(profile, ID));
         }
-        public async Task TransferAsync(Profile profile, Account otherAccount, decimal amount, string desc=null)
+        public async Task TransferAsync(Profile profile, Account destination, decimal amount, string desc=null)
         {
-            Balance += amount;
-            otherAccount.Balance -= amount;
+            Balance -= amount;
+            destination.Balance += amount;
             Transaction thisTransaction = new Transaction(), otherTransaction = new Transaction();
 
             if (desc != null && desc == "")
@@ -76,21 +76,21 @@ namespace Goalie.Lib.Models
             thisTransaction.NewID();
             otherTransaction.NewID();
 
-            thisTransaction.Amount = amount;
+            thisTransaction.Amount = -amount;
             otherTransaction.Amount = amount;
 
-            thisTransaction.OtherAccountID = otherAccount.ID;
+            thisTransaction.OtherAccountID = destination.ID;
             otherTransaction.OtherAccountID = ID;
 
             thisTransaction.Description = desc;
             otherTransaction.Description = desc;
 
             TransactionsAllTime++;
-            otherAccount.TransactionsAllTime++;
+            destination.TransactionsAllTime++;
 
             // Start the tasks to get them going then "join" them by awaiting them all
             var task1 = RecordTransactionAsync(profile, thisTransaction);
-            var task2 = otherAccount.RecordTransactionAsync(profile, otherTransaction);
+            var task2 = destination.RecordTransactionAsync(profile, otherTransaction);
 
             await task1;
             await task2;

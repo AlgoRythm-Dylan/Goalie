@@ -69,13 +69,13 @@
                 </StackPanel>
             </Grid>
             <TextBlock Width="300" Margin="10 40 10 0">Description / Comments (optional)</TextBlock>
-            <TextBox Width="300" Height="60"/>
+            <TextBox Width="300" Height="60" x:Name="Description"/>
         </StackPanel>
         <Button Style="{StaticResource ActionButton}"
                 Grid.Row="2"
                 Cursor="Hand"
                 Height="40"
                 Width="180"
-                x:Name="TransferButton">Transfer</Button>
+                x:Name="TransferButton" Click="TransferButton_Click">Transfer</Button>
     </Grid>
 </Window>

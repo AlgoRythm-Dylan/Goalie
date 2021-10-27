@@ -52,7 +52,7 @@ namespace Goalie.Lib.UserControls
             double progressBarWidth = (double)(Account.Balance / (Account.FixedGoal ?? 0)) * GoalProgressbarOuter.ActualWidth;
             if (progressBarWidth > GoalProgressbarOuter.ActualWidth)
                 progressBarWidth = GoalProgressbarOuter.ActualWidth; // Prevent overflow of accounts at more than 100%
-            GoalProgressbarInner.Width = progressBarWidth;
+            GoalProgressbarInner.Width = progressBarWidth > 0 ? progressBarWidth : 0;
             int remainingPixels = (int)(GoalProgressbarOuter.ActualWidth - progressBarWidth);
             if(remainingPixels <= 3)
             {
