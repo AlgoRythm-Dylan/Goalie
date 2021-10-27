@@ -55,7 +55,7 @@
                     <TextBlock Style="{StaticResource FormLabel}">Balance:</TextBlock>
                     <TextBox Grid.Column="1" Style="{StaticResource FormTextBox}" x:Name="InitialBalance" Text="$0.00"/>
                 </Grid>
-                <Grid>
+                <Grid x:Name="AmountPerPaycheck">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource LabelSize}"/>
                         <ColumnDefinition Width="*"/>
@@ -73,7 +73,7 @@
                                   SelectedValue="0"/>
                     </StackPanel>
                 </Grid>
-                <Grid>
+                <Grid x:Name="GoalSettings">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource LabelSize}"/>
                         <ColumnDefinition Width="*"/>
@@ -84,7 +84,7 @@
                         <TextBlock VerticalAlignment="Center">Leave this field blank or as $0 for no specific goal</TextBlock>
                     </StackPanel>
                 </Grid>
-                <Grid>
+                <Grid x:Name="ContinueSettings">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource LabelSize}"/>
                         <ColumnDefinition Width="*"/>
@@ -103,7 +103,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="100"
                         Height="30"
-                        Margin="0 0 10 0" Click="Button_Click_1">Cancel</Button>
+                        Margin="0 0 10 0" Click="CloseButton_Click">Cancel</Button>
                 <Button Width="100"
                         Height="30"
                         Margin="0 0 10 0"

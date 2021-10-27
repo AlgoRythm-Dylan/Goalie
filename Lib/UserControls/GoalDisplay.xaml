@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="1080">
     <UserControl Template="{StaticResource ClickableCard}" Cursor="Hand">
-        <Grid Background="Transparent">
+        <Grid Background="Transparent" MouseDown="Grid_MouseDown" IsHitTestVisible="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

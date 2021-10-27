@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Goalie.Lib;
 using Goalie.Lib.Data;
 using Goalie.Lib.Models;
 using Goalie.Lib.UserControls;
@@ -112,10 +113,12 @@ namespace Goalie
                 GoalScroll.Children.Add(new GoalDisplay(pinnedAccount));
             foreach(Account account in nonPinnedAccounts)
             {
-                GoalScroll.Children.Add(new GoalDisplay(account));
+                var display = new GoalDisplay(account);
+                GoalScroll.Children.Add(display);
             }
             foreach(GoalDisplay child in GoalScroll.Children)
             {
+                child.Update += Display_Update;
                 child.Margin = new Thickness(20, 5, 20, 5);
                 child.Height = 100;
             }
@@ -132,6 +135,14 @@ namespace Goalie
                 }
             }
 
+        }
+
+        private async void Display_Update(object sender, RoutedEventArgs e)
+        {
+            var eventData = ((AccountRoutedEventArgs)e).Account;
+            Profile.SetAccountByID(eventData.ID, eventData);
+            await ProfileService.WriteAsync(Profile);
+            DisplayProfile();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)

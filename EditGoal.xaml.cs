@@ -45,6 +45,12 @@ namespace Goalie
             {
                 Title = $"Edit Goal \"{Account.Name}\"";
                 GoalLabel.Text = $"Edit Goal \"{Account.Name}\"";
+                if(Account.Type == AccountType.GeneralSavings)
+                {
+                    AmountPerPaycheck.Visibility = Visibility.Collapsed;
+                    GoalSettings.Visibility = Visibility.Collapsed;
+                    ContinueSettings.Visibility = Visibility.Collapsed;
+                }
             }
             SavingsType.ItemsSource = DropDownItems.GoalSavingsTypes;
             AccountName.Text = Account.Name;
@@ -86,10 +92,14 @@ namespace Goalie
 
             Account.Name = AccountName.Text;
             Account.Balance = balance;
-            Account.SavingsAmount = savingsAmount;
-            Account.SavingsType = (GoalSavingsType)SavingsType.SelectedValue;
-            Account.FixedGoal = goal;
-            Account.ContinueSavingAfterGoalMet = ContinueAfterGoalMet.IsChecked ?? true;
+
+            if (Account.Type != AccountType.GeneralSavings)
+            {
+                Account.SavingsAmount = savingsAmount;
+                Account.SavingsType = (GoalSavingsType)SavingsType.SelectedValue;
+                Account.FixedGoal = goal;
+                Account.ContinueSavingAfterGoalMet = ContinueAfterGoalMet.IsChecked ?? true;
+            }
             if (IsNewMode)
                 Account.NewID();
 
@@ -98,7 +108,7 @@ namespace Goalie
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

@@ -1,18 +1,9 @@
-﻿using Goalie.Lib.Models;
+﻿using Goalie.Lib.Data;
+using Goalie.Lib.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Goalie.Lib.UserControls
 {
@@ -22,9 +13,23 @@ namespace Goalie.Lib.UserControls
     public partial class GoalDisplay : UserControl
     {
         public Account Account { get; set; }
+        public static readonly RoutedEvent UpdateEvent = EventManager.RegisterRoutedEvent(
+            "Update", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GoalDisplay));
         public GoalDisplay()
         {
             InitializeComponent();
+        }
+
+        public event RoutedEventHandler Update
+        {
+            add { AddHandler(UpdateEvent, value); }
+            remove { RemoveHandler(UpdateEvent, value); }
+        }
+
+        void RaiseUpdateEvent()
+        {
+            AccountRoutedEventArgs newEventArgs = new AccountRoutedEventArgs(UpdateEvent, Account);
+            RaiseEvent(newEventArgs);
         }
 
         protected override void OnRender(DrawingContext ctx)
@@ -104,6 +109,18 @@ namespace Goalie.Lib.UserControls
                     GoalAmountDisplay.Visibility = Visibility.Collapsed;
                     GoalProgressbarOuter.Visibility = Visibility.Collapsed;
                 }
+            }
+        }
+
+        private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var editor = new EditGoal(Account);
+            editor.Owner = Window.GetWindow(this);
+            editor.ShowDialog();
+            if (editor.ShouldSave)
+            {
+                Account = editor.Account;
+                RaiseUpdateEvent();
             }
         }
     }
