@@ -34,7 +34,7 @@ namespace Goalie
                 newProfileDialog.Owner = this;
                 newProfileDialog.ShowDialog();
                 Profile profile = newProfileDialog.Profile;
-                if (profile == null)
+                if (!newProfileDialog.ShouldSave || profile == null)
                 {
                     Close();
                 }

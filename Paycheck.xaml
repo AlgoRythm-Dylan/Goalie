@@ -30,8 +30,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock>Net pay (after tax):</TextBlock>
-                <TextBox x:Name="NetPay" Width="200" TextChanged="NetPay_TextChanged"/>
+                <TextBox x:Name="NetPay" Width="250" TextChanged="NetPay_TextChanged"/>
                 <TextBlock Foreground="{StaticResource SoftControlForeground}" x:Name="Minimum">Minimum: ...</TextBlock>
+                <TextBlock Margin="0 40 0 0">Description:</TextBlock>
+                <TextBox x:Name="Description" AcceptsReturn="True" Height="100" Text="Paycheck"/>
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

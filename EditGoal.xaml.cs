@@ -8,7 +8,7 @@ namespace Goalie
     /// <summary>
     /// Interaction logic for EditGoal.xaml
     /// </summary>
-    public partial class EditGoal : Window
+    public partial class EditGoal : Window, IShouldSave
     {
         public Account Account { get; set; }
         public bool IsNewMode { get; set; }

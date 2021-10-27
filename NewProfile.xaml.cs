@@ -9,13 +9,15 @@ namespace Goalie
     /// <summary>
     /// Interaction logic for NewProfile.xaml
     /// </summary>
-    public partial class NewProfile : Window
+    public partial class NewProfile : Window, IShouldSave
     {
         public Profile Profile { get; set; }
+        public bool ShouldSave { get; set; }
         public NewProfile()
         {
             InitializeComponent();
             Profile = null;
+            ShouldSave = false;
         }
         protected override void OnContentRendered(EventArgs e)
         {
@@ -48,6 +50,7 @@ namespace Goalie
                 Profile.Accounts.Add(generalSavingsAccount);
                 Profile.PinnedAccount = generalSavingsAccount.ID;
 
+                ShouldSave = true;
                 Close();
             }
             catch

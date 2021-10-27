@@ -79,14 +79,15 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
+                <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="{StaticResource HoverBorderColor}" />
                 </Trigger>
-                <!--<Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Background" Value="{StaticResource HoverBackgroundColor}" />
-                </Trigger>-->
-                <Trigger Property="IsPressed" Value="true">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="{StaticResource ActiveBackgroundColor}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.2"/>
+                    <Setter Property="Cursor" Value="Arrow"/>
                 </Trigger>
             </Style.Triggers>
             <Style.Resources>
@@ -99,11 +100,11 @@
             <Setter Property="BorderBrush" Value="{StaticResource GoalieGreen}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
+                <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="{StaticResource GoalieGreenLight}" />
                     <Setter Property="BorderBrush" Value="{StaticResource GoalieGreen}" />
                 </Trigger>
-                <Trigger Property="IsPressed" Value="true">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="{StaticResource GoalieGreen}" />
                     <Setter Property="Foreground" Value="{StaticResource GoalieGreenContrast}" />
                 </Trigger>
@@ -113,13 +114,13 @@
             <Setter Property="BorderBrush" Value="{StaticResource DangerColor}"/>
             <Setter Property="Foreground" Value="{StaticResource DangerColor}"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
+                <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="{StaticResource DangerColor}" />
                 </Trigger>
-                <Trigger Property="IsMouseOver" Value="true">
+                <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="{StaticResource DangerColorBackground}" />
                 </Trigger>
-                <Trigger Property="IsPressed" Value="true">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="{StaticResource ActiveDangerColorBackground}" />
                 </Trigger>
             </Style.Triggers>
