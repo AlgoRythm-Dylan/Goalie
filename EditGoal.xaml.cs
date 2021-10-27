@@ -43,13 +43,18 @@ namespace Goalie
             }
             else
             {
-                Title = $"Edit Goal \"{Account.Name}\"";
-                GoalLabel.Text = $"Edit Goal \"{Account.Name}\"";
                 if(Account.Type == AccountType.GeneralSavings)
                 {
                     AmountPerPaycheck.Visibility = Visibility.Collapsed;
                     GoalSettings.Visibility = Visibility.Collapsed;
                     ContinueSettings.Visibility = Visibility.Collapsed;
+                    Title = $"Edit Account \"{Account.Name}\"";
+                    GoalLabel.Text = $"Edit Account \"{Account.Name}\"";
+                }
+                else
+                {
+                    Title = $"Edit Goal \"{Account.Name}\"";
+                    GoalLabel.Text = $"Edit Goal \"{Account.Name}\"";
                 }
             }
             SavingsType.ItemsSource = DropDownItems.GoalSavingsTypes;

@@ -44,9 +44,11 @@ namespace Goalie
 
         private async void Done_Click(object sender, RoutedEventArgs e)
         {
-            await Process();
-            ShouldSave = true;
-            Close();
+            if(await Process())
+            {
+                ShouldSave = true;
+                Close();
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -107,7 +109,7 @@ namespace Goalie
             DoSummary();
         }
 
-        private async Task Process()
+        private async Task<bool> Process()
         {
             // We don't need to validate anything here because the user can't click the
             // button unless everything is already valid
@@ -115,6 +117,12 @@ namespace Goalie
             foreach (var account in AccountList.Where(item => item.IsSelected))
                 selectedAccounts.Add(account);
             decimal income = decimal.Parse(NetPay.Text, NumberStyles.Currency);
+            if(income <= 0)
+            {
+                MessageBox.Show("Income must be positive and non-zero", "Not Enough Income",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             decimal totalPaid = 0;
             string description = Description.Text;
             // Create transactions
@@ -131,6 +139,7 @@ namespace Goalie
             Profile.GeneralAccount.Balance += income - totalPaid;
             // Save profile
             await ProfileService.WriteAsync(Profile);
+            return true;
         }
 
     }
