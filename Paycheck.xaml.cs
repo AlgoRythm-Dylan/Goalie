@@ -1,8 +1,10 @@
 ﻿using Goalie.Lib;
+using Goalie.Lib.Data;
 using Goalie.Lib.Models;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -40,9 +42,11 @@ namespace Goalie
             DoSummary();
         }
 
-        private void Done_Click(object sender, RoutedEventArgs e)
+        private async void Done_Click(object sender, RoutedEventArgs e)
         {
-
+            await Process();
+            ShouldSave = true;
+            Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -54,9 +58,7 @@ namespace Goalie
         {
             List<Account> selectedAccounts = new List<Account>();
             foreach (var account in AccountList.Where(item => item.IsSelected))
-            {
                 selectedAccounts.Add(account);
-            }
             decimal minimumForGoals = PaycheckDistributor.MinimumRequired(selectedAccounts);
             Minimum.Text = $"Minimum: {minimumForGoals:C}";
             try
@@ -103,6 +105,32 @@ namespace Goalie
         private void NetPay_TextChanged(object sender, TextChangedEventArgs e)
         {
             DoSummary();
+        }
+
+        private async Task Process()
+        {
+            // We don't need to validate anything here because the user can't click the
+            // button unless everything is already valid
+            var selectedAccounts = new List<Account>();
+            foreach (var account in AccountList.Where(item => item.IsSelected))
+                selectedAccounts.Add(account);
+            decimal income = decimal.Parse(NetPay.Text, NumberStyles.Currency);
+            decimal totalPaid = 0;
+            string description = Description.Text;
+            // Create transactions
+            foreach (var record in PaycheckDistributor.DistributePaycheck(selectedAccounts, income))
+            {
+                Transaction txn = new Transaction();
+                txn.NewID();
+                txn.Amount = record.Value;
+                txn.Description = description;
+                Profile.GetAccountByID(record.Key.ID).Balance += record.Value;
+                totalPaid += record.Value;
+                await record.Key.RecordTransactionAsync(Profile, txn);
+            }
+            Profile.GeneralAccount.Balance += income - totalPaid;
+            // Save profile
+            await ProfileService.WriteAsync(Profile);
         }
 
     }

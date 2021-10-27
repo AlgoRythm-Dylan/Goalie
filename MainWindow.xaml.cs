@@ -168,6 +168,10 @@ namespace Goalie
             var paycheck = new Paycheck(Profile);
             paycheck.Owner = this;
             paycheck.ShowDialog();
+            if (paycheck.ShouldSave)
+            {
+                DisplayProfile(); // Profile will be updated in memory, no need to reload from disk
+            }
         }
     }
 }

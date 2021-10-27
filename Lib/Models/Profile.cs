@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Goalie.Lib.Models
 {
@@ -22,6 +23,16 @@ namespace Goalie.Lib.Models
                 if (account.ID == ID)
                     return account;
             return null;
+        }
+        [JsonIgnore]
+        public Account GeneralAccount { 
+            get
+            {
+                foreach (Account account in Accounts)
+                    if (account.Type == AccountType.GeneralSavings)
+                        return account;
+                return null;
+            } 
         }
 
     }

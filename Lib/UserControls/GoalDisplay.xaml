@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Goalie.Lib.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="1080">
-    <UserControl Template="{StaticResource Card}" Cursor="Hand">
-        <Grid>
+    <UserControl Template="{StaticResource ClickableCard}" Cursor="Hand">
+        <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

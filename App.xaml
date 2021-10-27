@@ -12,6 +12,7 @@
         <Brush x:Key="HoverBackgroundColor">#edf4ff</Brush>
         <Brush x:Key="BorderColor">#D1D1D1</Brush>
         <Brush x:Key="ControlBackground">#FFFFFF</Brush>
+        <Brush x:Key="HoverControlBackground">#ededed</Brush>
         <Brush x:Key="ControlForeground">#000000</Brush>
         <Brush x:Key="SoftControlForeground">#4a4a4a</Brush>
         <Brush x:Key="DangerColor">#ff6666</Brush>
@@ -127,22 +128,6 @@
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}"/>
 
-        <Style TargetType="Grid" x:Key="_CardGrid">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Background" Value="{StaticResource ControlBackground}"/>
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="{StaticResource StandardCornerRadius}"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect Color="Black" Direction="270" BlurRadius="20" ShadowDepth="5" Opacity="0.4"/>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Style.Resources>
-        </Style>
-
         <ControlTemplate TargetType="UserControl" x:Key="Card">
             <Grid>
                 <Border CornerRadius="{StaticResource StandardCornerRadius}" BorderThickness="0"
@@ -155,7 +140,30 @@
                 </Border>
             </Grid>
         </ControlTemplate>
-        
+
+        <ControlTemplate TargetType="UserControl" x:Key="ClickableCard">
+            <Grid Cursor="Hand">
+                <Border CornerRadius="{StaticResource StandardCornerRadius}" BorderThickness="0"
+                        SnapsToDevicePixels="True">
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="{StaticResource ControlBackground}"/>
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.Background" Value="{StaticResource HoverControlBackground}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Direction="270" BlurRadius="20" ShadowDepth="5" Opacity="0.4"/>
+                    </Border.Effect>
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+
         <!-- ComboBox styling -->
         <Style TargetType="ComboBox">
             <Setter Property="Template">
