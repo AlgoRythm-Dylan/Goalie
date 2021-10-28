@@ -98,7 +98,7 @@ namespace Goalie.Lib.UserControls
                     CurrentBalance.Text = Account.Balance.ToString("C");
                     //                       At this point, this is safe, but compiler complains
                     GoalAmountDisplay.Text = (Account.FixedGoal??0).ToString("C");
-                    GoalProgressPercentageText.Text = Math.Round(Account.Balance / (Account.FixedGoal ?? 0) * 100).ToString("0") + "%";
+                    GoalProgressPercentageText.Text = Math.Floor(Account.Balance / (Account.FixedGoal ?? 0) * 100).ToString("0") + "%";
                     UpdateGoalProgressbar();
                 }
                 else

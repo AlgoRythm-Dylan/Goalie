@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Goalie.Lib.Models
@@ -31,6 +32,21 @@ namespace Goalie.Lib.Models
         public decimal SpentAllTime { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Enabled { get; set; }
+        [JsonIgnore]
+        public bool IsGoalComplete
+        { 
+            get {
+                return !ContinueSavingAfterGoalMet && IsGoalMet;
+            }
+        }
+        [JsonIgnore]
+        public bool IsGoalMet
+        {
+            get
+            {
+                return FixedGoal != null && Balance >= (FixedGoal ?? 0);
+            }
+        }
 
         public override string ToString()
         {
