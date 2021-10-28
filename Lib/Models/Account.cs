@@ -60,9 +60,11 @@ namespace Goalie.Lib.Models
         }
 
         // Behavior
-        public DataDir GetTransactionDataDir(Profile profile)
+        public DataDir GetTransactionDataDir(Profile profile, Transaction transaction)
         {
-            return new DataDir("transactions", AccountService.GetAccountDataDir(profile, ID));
+            var txnDir = new DataDir("transactions", AccountService.GetAccountDataDir(profile, ID));
+            return new DataDir($"{transaction.Date.Month}-{transaction.Date.Year}", txnDir);
+
         }
         public async Task TransferAsync(Profile profile, Account destination, decimal amount, string desc=null)
         {
@@ -98,7 +100,7 @@ namespace Goalie.Lib.Models
         }
         public async Task RecordTransactionAsync(Profile profile, Transaction transaction)
         {
-            DataDir transactionDataDir = GetTransactionDataDir(profile);
+            DataDir transactionDataDir = GetTransactionDataDir(profile, transaction);
             transactionDataDir.Ensure();
             await File.WriteAllTextAsync(Path.Combine(transactionDataDir.Path, $"{transaction.ID}.transaction.json"),
                 JsonSerializer.Serialize(transaction));
