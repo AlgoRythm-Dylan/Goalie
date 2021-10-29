@@ -30,6 +30,15 @@ namespace Goalie.Lib.Models
                 if (Accounts[i].ID == ID)
                     Accounts[i] = newAccount;
         }
+        public void DeleteAccountByID(string ID)
+        {
+            for (int i = 0; i < Accounts.Count; i++)
+                if (Accounts[i].ID == ID)
+                {
+                    Accounts.RemoveAt(i);
+                    i--;
+                }
+        }
         [JsonIgnore]
         public Account GeneralAccount { 
             get

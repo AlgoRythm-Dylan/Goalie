@@ -100,6 +100,12 @@
             </StackPanel>
         </ScrollViewer>
         <DockPanel Grid.Row="2" Background="{StaticResource VeryLightGray}">
+            <Button Style="{StaticResource DangerButton}"
+                    x:Name="DeleteButton"
+                    Width="100"
+                    Height="30"
+                    Margin="10 0"
+                    Cursor="Hand" Click="DeleteButton_Click">Delete Goal</Button>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="100"
                         Height="30"

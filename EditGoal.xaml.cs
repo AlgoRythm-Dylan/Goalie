@@ -8,16 +8,18 @@ namespace Goalie
     /// <summary>
     /// Interaction logic for EditGoal.xaml
     /// </summary>
-    public partial class EditGoal : Window, IShouldSave
+    public partial class EditGoal : Window, IShouldSave, IShouldDelete
     {
         public Account Account { get; set; }
         public bool IsNewMode { get; set; }
         public bool ShouldSave { get; set; }
+        public bool ShouldDelete { get; set; }
         public EditGoal()
         {
             InitializeComponent();
             IsNewMode = true;
             ShouldSave = false;
+            ShouldDelete = false;
             Account = new Account();
             Account.Type = AccountType.Goal;
             Account.SavingsAmount = 5;
@@ -31,6 +33,7 @@ namespace Goalie
             InitializeComponent();
             IsNewMode = false;
             ShouldSave = false;
+            ShouldDelete = false;
             Account = account;
             DisplayAccount();
         }
@@ -40,6 +43,7 @@ namespace Goalie
             {
                 Title = "New Goal";
                 GoalLabel.Text = "New Goal";
+                DeleteButton.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -50,6 +54,7 @@ namespace Goalie
                     ContinueSettings.Visibility = Visibility.Collapsed;
                     Title = $"Edit Account \"{Account.Name}\"";
                     GoalLabel.Text = $"Edit Account \"{Account.Name}\"";
+                    DeleteButton.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
@@ -116,6 +121,16 @@ namespace Goalie
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("Delete this goal? The balance will be transferred to the general savings account",
+                "Confirm", MessageBoxButton.YesNoCancel, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                ShouldDelete = true;
+                Close();
+            }
         }
     }
 }

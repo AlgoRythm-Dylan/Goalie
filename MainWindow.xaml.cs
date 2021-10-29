@@ -139,10 +139,23 @@ namespace Goalie
 
         private async void Display_Update(object sender, RoutedEventArgs e)
         {
-            var eventData = ((AccountRoutedEventArgs)e).Account;
-            Profile.SetAccountByID(eventData.ID, eventData);
-            await ProfileService.WriteAsync(Profile);
-            DisplayProfile();
+            var ev = (AccountRoutedEventArgs)e;
+            if (ev.ShouldSave)
+            {
+                var account = ev.Account;
+                Profile.SetAccountByID(account.ID, account);
+                await ProfileService.WriteAsync(Profile);
+                DisplayProfile();
+            }
+            else if (ev.ShouldDelete)
+            {
+                var account = ev.Account;
+                Profile.GeneralAccount.Balance += account.Balance;
+                Profile.DeleteAccountByID(account.ID);
+                AccountService.Delete(Profile, account.ID);
+                await ProfileService.WriteAsync(Profile);
+                DisplayProfile();
+            }
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)

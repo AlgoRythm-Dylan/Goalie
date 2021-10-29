@@ -13,6 +13,8 @@ namespace Goalie.Lib.UserControls
     public partial class GoalDisplay : UserControl
     {
         public Account Account { get; set; }
+        private bool ShouldSave { get; set; }
+        private bool ShouldDelete { get; set; }
         public static readonly RoutedEvent UpdateEvent = EventManager.RegisterRoutedEvent(
             "Update", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GoalDisplay));
         public GoalDisplay()
@@ -29,6 +31,8 @@ namespace Goalie.Lib.UserControls
         void RaiseUpdateEvent()
         {
             AccountRoutedEventArgs newEventArgs = new AccountRoutedEventArgs(UpdateEvent, Account);
+            newEventArgs.ShouldSave = ShouldSave;
+            newEventArgs.ShouldDelete = ShouldDelete;
             RaiseEvent(newEventArgs);
         }
 
@@ -42,6 +46,8 @@ namespace Goalie.Lib.UserControls
         {
             InitializeComponent();
             SetAccount(account);
+            ShouldSave = false;
+            ShouldDelete = false;
         }
 
         private void UpdateGoalProgressbar()
@@ -117,11 +123,10 @@ namespace Goalie.Lib.UserControls
             var editor = new EditGoal(Account);
             editor.Owner = Window.GetWindow(this);
             editor.ShowDialog();
-            if (editor.ShouldSave)
-            {
-                Account = editor.Account;
-                RaiseUpdateEvent();
-            }
+            Account = editor.Account;
+            ShouldSave = editor.ShouldSave;
+            ShouldDelete = editor.ShouldDelete;
+            RaiseUpdateEvent();
         }
     }
 }
