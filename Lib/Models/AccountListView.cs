@@ -17,7 +17,7 @@
             SpentAllTime = account.SpentAllTime;
             CreatedDate = account.CreatedDate;
             Enabled = account.Enabled;
-            IsSelected = true;
+            IsSelected = !IsGoalComplete;
         }
         public bool IsSelected { get; set; }
     }
