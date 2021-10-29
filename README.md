@@ -76,7 +76,7 @@ this option.
 You can change these settings at any time by
 clicking on the goal from the home screen
 
-## 3) Enter yoru current money
+## 3) Enter your current money
 
 The ultimate goal of this is to make the
 "total savings" figure line up with the
